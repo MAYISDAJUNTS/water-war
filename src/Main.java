@@ -10,7 +10,7 @@ public class Main {
 
 
 
-        
+
 
         int c;
         int d;
