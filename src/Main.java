@@ -9,6 +9,9 @@ public class Main {
         Scanner scanner=new Scanner(System.in);
 
 
+
+        
+
         int c;
         int d;
         char[][] a=new char[5][5];
