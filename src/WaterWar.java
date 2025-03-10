@@ -18,10 +18,10 @@ public class WaterWar {
 
     }
 
-    static void printBoard(char a[][]) {
+    static void printBoard(char[][] a) {
 
-        for (int i=0; i<a.length; i++){
-            System.out.println(Arrays.toString(a[i]));
+        for (char[] chars : a) {
+            System.out.println(Arrays.toString(chars));
         }
     }
 
@@ -76,20 +76,18 @@ public class WaterWar {
 
     public static void hit(char[][] a, char[][] b) {
         Scanner scanner=new Scanner(System.in);
-        boolean win1 = false;
-        boolean win2 = false;
-        int f = 0;
-        int y = 0;
+        int f;
+        int y;
         int q;
         int w;
-        qanak(a,f);
-        qanak(b, y);
+        f=qanak(a);
+        y=qanak(b);
         for (int i = 0; i < 1; i--) {
-           if (i%2==0) {
-               System.out.println("նշիր վանդակ, որտեղ պետք է հարվածես խաղացող առաջին");
-           } else {
-               System.out.println("նշիր վանդակ, որտեղ պետք է հարվածես խաղացող երկրորդ");
-           }
+            if (i%2==0) {
+                System.out.println("նշիր վանդակ, որտեղ պետք է հարվածես խաղացող առաջին");
+            } else {
+                System.out.println("նշիր վանդակ, որտեղ պետք է հարվածես խաղացող երկրորդ");
+            }
             q=scanner.nextInt();
             w=scanner.nextInt();
 
@@ -97,7 +95,7 @@ public class WaterWar {
                 if (b[q][w]=='o'){
                     b[q][w]='1';
                     System.out.println("հարվածեցիք");
-                    qanak(b, y);
+                    f = qanak(b);
 
                 } else if (b[q][w]==' ') {
                     b[q][w]=' ';
@@ -106,14 +104,15 @@ public class WaterWar {
                     System.out.println("կրկին փորձեք");
                     i=i-1;
                 }
-                if (isAlive(y)){
-                 break;
+                if (isAlive(f)){
+                    System.out.println("դուք հաղթեցիք առաջին");
+                    break;
                 }
-            }  else{
+            }  else {
                 if (a[q][w]=='o'){
                     a[q][w]='1';
                     System.out.println("հարվածեցիք");
-                    qanak(a, f);
+                    y=qanak(a);
                 } else if (a[q][w]==' ') {
                     a[q][w]=' ';
                     a[q][w]='x';
@@ -123,30 +122,29 @@ public class WaterWar {
                     i=i-1;
                 }
 
-               if (isAlive(f)){
-                   break;
-               }
+                if (isAlive(y)){
+                    System.out.println("դուք հաղթեցիք երկրորդ");
+                    break;
+                }
             }
 
         }
     }
 
-    static void qanak(char[][] a, int f){
-        f=0;
-        for (int i = 0; i < a.length; i++) {
+    static int qanak(char[][] a){
+        int f=0;
+        for (char[] chars : a) {
             for (int j = 0; j < a.length; j++) {
-                if (a[i][j]=='o'){
-                    f=f+1;
+                if (chars[j] == 'o') {
+                    f = f + 1;
                 }
             }
         }
+        return f;
     }
 
     static boolean isAlive(int f){
-        if (f==0){
-            return false;
-        }
-        return true;
+        return f == 0;
     }
 
 }
